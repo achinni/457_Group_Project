@@ -13,6 +13,8 @@ public class Airlock : MonoBehaviour {
 	}
 	
 	// Update is called once per frame
+	/*calculates the distance between closet and player.
+		If the distance is less than specified distance (here it is 5) then the player is close enough */
 	void Update () {
 		if(Vector3.Distance(this.transform.position, Player3.transform.position) < distanceOfAirlock){
 			playerCloseEnough = true;
@@ -23,7 +25,8 @@ public class Airlock : MonoBehaviour {
 	}
 	
 	void OnGUI () {
-     if (playerCloseEnough) {
+     //GUI.Label(Rectangle(x,y), message, message style)
+	 if (playerCloseEnough) {
          GUI.Label(new Rect(Screen.width / 2, Screen.height / 2, 200f, 200f), "Player approaching Airlock...", notifStyle4);
 		 GUI.Label(new Rect(Screen.width / 2, (Screen.height / 2)+30, 200f, 200f), "Make sure that the suit is on.", notifStyle4);
      }

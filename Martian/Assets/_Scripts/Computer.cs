@@ -12,6 +12,8 @@ public class Computer : MonoBehaviour {
 	}
 	
 	// Update is called once per frame
+	/*calculates the distance between closet and player.
+		If the distance is less than specified distance (here it is 5) then the player is close enough */
 	void Update () {
 		if(Vector3.Distance(this.transform.position, Player1.transform.position) < distanceOfComp){
 			playerCloseEnough = true;
@@ -22,6 +24,7 @@ public class Computer : MonoBehaviour {
 	}
 	
 	void OnGUI () {
+     //GUI.Label(Rectangle(x,y), message, message style)
      if (playerCloseEnough) {
          GUI.Label(new Rect(Screen.width / 2, Screen.height / 2, 200f, 200f), "Player approaching computer...", notifStyle3);
      }
