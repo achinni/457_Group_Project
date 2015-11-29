@@ -20,9 +20,8 @@ public class PlayerController : MonoBehaviour {
 	private bool dressed;
 	private bool inComputer;
 	private bool inCloset;
-	private bool outside;
-	
-	
+	private bool outside;	
+
 	void Start () {
 		controller = GetComponent<CharacterController>();
 		gameObject = GetComponent<GameObject>();
@@ -31,7 +30,6 @@ public class PlayerController : MonoBehaviour {
 	void Update () {
 
 		//Move PLayer
-
 		Vector3 input = new Vector3(Input.GetAxisRaw("Horizontal"),0,Input.GetAxisRaw("Vertical"));
 		
 		if (input != Vector3.zero) {
@@ -82,6 +80,7 @@ public class PlayerController : MonoBehaviour {
 		} else if (other.name == "Airlock" && dressed == false) {
 			transform.gameObject.SetActive (false);
 			print ("you are dead, you are dead");
+			Application.LoadLevel(0);
 		} else if (other.name == "Airlock" && dressed == true) {
 			outside = true;
 		}
