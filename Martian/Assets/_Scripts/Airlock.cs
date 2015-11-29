@@ -13,7 +13,7 @@ public class Airlock : MonoBehaviour {
 	}
 	
 	// Update is called once per frame
-	/*calculates the distance between closet and player.
+	/*calculates the distance between airlock and player.
 		If the distance is less than specified distance (here it is 5) then the player is close enough */
 	void Update () {
 		if(Vector3.Distance(this.transform.position, Player3.transform.position) < distanceOfAirlock){

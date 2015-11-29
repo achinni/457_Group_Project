@@ -21,10 +21,17 @@ public class PlayerController : MonoBehaviour {
 	private bool inComputer;
 	private bool inCloset;
 	private bool outside;	
+	
+	//Sounds
+	public AudioSource mainSound;
+	public AudioSource windSound;
+	public AudioSource DoorSound;
+	public AudioSource SuitSound;
 
 	void Start () {
 		controller = GetComponent<CharacterController>();
 		gameObject = GetComponent<GameObject>();
+		mainSound.Play();
 	}
 	
 	void Update () {
@@ -55,12 +62,14 @@ public class PlayerController : MonoBehaviour {
 
 			if(dressed){
 				print("taking off");
+				SuitSound.Play();
 				suit.SetActive(false);
 				dressed = false;
 			}
 
 			else{
 				print ("putting on");
+				SuitSound.Play();
 				suit.SetActive(true);
 				dressed = true;
 			}
@@ -77,14 +86,30 @@ public class PlayerController : MonoBehaviour {
 			inCloset = true;
 		} else if (other.name == "Computer") {
 			inComputer = true;
-		} else if (other.name == "Airlock" && dressed == false) {
+		} else if (other.name == "AirlockOut" && dressed == false) {
 			transform.gameObject.SetActive (false);
+			//DoorSound.Play();
 			print ("you are dead, you are dead");
 			Application.LoadLevel(0);
-		} else if (other.name == "Airlock" && dressed == true) {
+		} 
+		else if (other.name == "AirlockOut" && dressed == true) {
 			outside = true;
+			//DoorSound.Play();
+			if(mainSound.isPlaying)
+			{
+				mainSound.Stop();
+				windSound.Play();
+			}
 		}
-
+		else if (other.name == "AirlockIn" && dressed == true) {
+			outside = false;
+			DoorSound.Play();
+			if(windSound.isPlaying)
+			{
+				windSound.Stop();
+				mainSound.Play();
+			}
+		}
 
 	}
 	//Built in
