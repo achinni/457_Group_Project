@@ -27,6 +27,7 @@ public class PlayerController : MonoBehaviour {
 	public AudioSource windSound;
 	public AudioSource DoorSound;
 	public AudioSource SuitSound;
+	public AudioSource ComputerSound;
 
 	void Start () {
 		controller = GetComponent<CharacterController>();
@@ -86,6 +87,7 @@ public class PlayerController : MonoBehaviour {
 			inCloset = true;
 		} else if (other.name == "Computer") {
 			inComputer = true;
+			ComputerSound.Play();
 		} else if (other.name == "AirlockOut" && dressed == false) {
 			transform.gameObject.SetActive (false);
 			//DoorSound.Play();
