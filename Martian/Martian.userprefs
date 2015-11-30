@@ -1,0 +1,20 @@
+﻿<Properties>
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/_Scripts/CameraController.cs">
+    <Files>
+      <File FileName="Assets/_Scripts/CameraController.cs" Line="1" Column="1" />
+      <File FileName="Assets/_Scripts/IceTrigger.cs" Line="1" Column="1" />
+      <File FileName="Assets/_Scripts/PlayerController.cs" Line="250" Column="28" />
+      <File FileName="Assets/_Scripts/Computer.cs" Line="1" Column="1" />
+      <File FileName="Assets/_Scripts/AirConsole.cs" Line="1" Column="1" />
+      <File FileName="Assets/_Scripts/WaterConsole.cs" Line="1" Column="1" />
+      <File FileName="Assets/_Scripts/_MainGame.cs" Line="1" Column="1" />
+      <File FileName="Assets/_Scripts/Closet.cs" Line="1" Column="1" />
+      <File FileName="Assets/_Scripts/FoodConsole.cs" Line="1" Column="1" />
+    </Files>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+</Properties>

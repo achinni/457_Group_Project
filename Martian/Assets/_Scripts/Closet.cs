@@ -29,7 +29,7 @@ public class Closet : MonoBehaviour {
      if (playerCloseEnough) {
 		 //GUI.Label(Rectangle(x,y), message, message style)
          GUI.Label(new Rect(Screen.width / 2, Screen.height / 2, 200f, 200f), "Player approaching closet...", notifStyle);
-		 GUI.Label(new Rect(Screen.width / 2, Screen.height / 2, 200f, 200f), "Press 'c' to wear/remove suit when you are in the closet.", notifStyle2);
+		 GUI.Label(new Rect(Screen.width / 2, Screen.height / 2, 200f, 200f), "Press '1' to wear/remove suit when you are in the closet.", notifStyle2);
      }
 	}
 }
