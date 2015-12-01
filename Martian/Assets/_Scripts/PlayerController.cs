@@ -18,7 +18,11 @@ public class PlayerController : MonoBehaviour {
 	public float habWaterSpeed = 1;
 	public float habFoodSpeed = 1;
 	public float habAirSpeed = 1;
+	public float foodSpeed = 1;
+	public float waterSpeed = 1;
 	public float salvageWater = 100;
+	public GameObject meteorObject;
+	public int meteorNum = 10;
 
 	public GameObject suit;
 
@@ -27,6 +31,8 @@ public class PlayerController : MonoBehaviour {
 	
 	// System
 	private Quaternion targetRotation;
+	private float randX;
+	private float randZ;
 	
 	// Components
 	private CharacterController controller;
@@ -61,8 +67,14 @@ public class PlayerController : MonoBehaviour {
 	private float food;
 	private float water;
 	private float hab_air;
+	private float day_count = 1;
 
 	//GUI text for HUD
+
+	public Light lt;
+	public float duration = 10.0F;
+	public bool timer =false;
+	Vector3 temp = new Vector3(50.0f,0,0);  
 
 	public GameObject hab_food_text;
 	public GameObject hab_water_text;
@@ -71,6 +83,8 @@ public class PlayerController : MonoBehaviour {
 	public GameObject player_hunger_text;
 	public GameObject player_thirst_text;
 	public GameObject player_air_text;
+
+	public GameObject day_text;
 
 
 	//Sounds
@@ -101,11 +115,24 @@ public class PlayerController : MonoBehaviour {
 		player_air_text.GetComponent<Text> ().text = "Not In Suit";
 		player_thirst_text.GetComponent<Text> ().text = thirst.ToString();
 
+		day_text.GetComponent<Text> ().text = day_count.ToString();
+
 		walkSpeedStatic = walkSpeed;
 		thirstSpeedStatic = thirstSpeed;
 		airSpeedStatic = airSpeed;
 
 		ice = transform.FindChild ("Ice").gameObject;
+
+		for(int i = 0; i<meteorNum;i++){
+			randX = Random.Range(-90f,90f);
+			randZ = Random.Range(-90f,90f);
+			if((randZ >20 || randX < -20) && (randX < 30 || randX > 2)){
+				Instantiate(meteorObject,new Vector3(randX,0,randZ),Quaternion.identity);
+			}
+			else{
+				i--;
+			}
+		}
 	}
 	
 	void Update () {
@@ -209,38 +236,52 @@ public class PlayerController : MonoBehaviour {
 
 		if(Input.GetKeyDown("1") && inFoodConsole == true){
 			print ("Eating food");
-			food -= hunger;
-			hunger = 0;
+			if(food > 0){
+				food -= hunger;
+				hunger = 0;
+			}
 		}
+
+
 
 		//generate water
 
 		if(Input.GetKeyDown("1") && inWaterConsole == true){
 			print ("Converting air to water");
-			hab_air -= 10;
-			water +=5;
+			if(hab_air > 0){
+				hab_air -= 10;
+				water +=5;
+			}
+
 		}
 
 		//drink water
 
 		if(Input.GetKeyDown("2") && inWaterConsole == true){
 			print ("drinking water");
-			water -= thirst;
-			thirst = 0;
+			if(water > 0){
+				water -= thirst;
+				thirst = 0;
+			}
+
 		}
 
 		//generate air
 		if(Input.GetKeyDown("1") && inAirConsole == true){
 			print ("Converting water to air");
-			water -= 10;
-			hab_air += 5;
+			if(water > 0){
+				water -= 10;
+				hab_air += 5;
+			}
 		}
 
 		//refill space suit
 		if(Input.GetKeyDown("2") && inAirConsole == true){
 			print ("refill suit");
-			hab_air -= (100-air);
-			air = 100;
+			if(hab_air > 0){
+				hab_air -= (100-air);
+				air = 100;
+			}
 		}
 
 		//harvest ice
@@ -248,16 +289,21 @@ public class PlayerController : MonoBehaviour {
 			print ("pick up ice");
 			encumbered = true;
 			meteor.SetActive(false);
-			air = 100;
 			ice.gameObject.SetActive(true);
 		}
 
 		//Control Player HUD Resource Display
-		hunger += Time.deltaTime * hungerSpeed;
-		player_hunger_text.GetComponent<Text> ().text = hunger.ToString("F0");
+		if (hunger >= 0) {
+			hunger += Time.deltaTime * hungerSpeed;
+			player_hunger_text.GetComponent<Text> ().text = hunger.ToString ("F0");
+		}
+		if (thirst >= 0) {
+			thirst += Time.deltaTime * thirstSpeed;
+			player_thirst_text.GetComponent<Text> ().text = thirst.ToString ("F0");
+		}
 
-		thirst += Time.deltaTime * thirstSpeed;
-		player_thirst_text.GetComponent<Text> ().text = thirst.ToString("F0");
+		food += Time.deltaTime * foodSpeed;
+
 
 
 		if (dressed) {
@@ -271,8 +317,51 @@ public class PlayerController : MonoBehaviour {
 		hab_food_text.GetComponent<Text> ().text = food.ToString("F0");
 		hab_air -= Time.deltaTime * habAirSpeed;
 		hab_air_text.GetComponent<Text> ().text = hab_air.ToString("F0");
-		water -= Time.deltaTime * habWaterSpeed;
+		if (water > 0) {
+			water -= Time.deltaTime * habWaterSpeed;
+		}
 		hab_water_text.GetComponent<Text> ().text = water.ToString("F0");
+
+
+
+		//Day Night Setting
+
+		if (timer == false) {
+			duration -= Time.deltaTime;
+		}
+		
+		if (duration <= 0) {
+			lt.intensity = 0.1F;
+			if(outside == true)
+				Application.LoadLevel(0);
+			else if(outside==false){
+				day_count++;
+
+				for(int i = 0; i<meteorNum;i++){
+					randX = Random.Range(-90f,90f);
+					randZ = Random.Range(-90f,90f);
+					if((randZ >20 || randX < -20) && (randX < 30 || randX > 2)){
+						Instantiate(meteorObject,new Vector3(randX,0,randZ),Quaternion.identity);
+					}
+					else{
+						i--;
+					}
+				}
+			}
+
+			timer = true;
+			day_text.GetComponent<Text>().text = day_count.ToString();
+		}
+		
+		if (timer == true) {
+			duration += Time.deltaTime;
+		}
+		
+		if (duration >= 5) {
+			lt.intensity=1;
+			timer = false;
+		}
+
 
 
 	}

@@ -3,7 +3,7 @@ using System.Collections;
 
 public class IceTrigger : MonoBehaviour {
 	public GameObject Player1;
-	public float distanceOfComp = 5;
+	public float distanceOfComp = 1;
 	private bool playerCloseEnough = false;
 	private int remaining;
 	public GUIStyle notifStyle3 = new GUIStyle();
