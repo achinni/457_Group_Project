@@ -322,6 +322,13 @@ public class PlayerController : MonoBehaviour {
 			duration -= Time.deltaTime;
 		}
 		
+		if(duration == 4){
+			for(int tempi = 3; tempi >=0; tempi--){
+				lt.enabled = false;
+				Invoke("makeItDark",1);
+			}
+			lt.intensity = 0.3F;
+		}
 		if (duration <= 0) {
 			lt.intensity = 0.1F;
 			if(outside == true){
@@ -354,6 +361,7 @@ public class PlayerController : MonoBehaviour {
 		if (duration >= 5) {
 			lt.intensity=1;
 			timer = false;
+			duration += 10;
 		}
 
 
@@ -454,11 +462,18 @@ public class PlayerController : MonoBehaviour {
 		if(duration <= 0 && outside == true){
 			GUI.Label(new Rect(Screen.width / 2, Screen.height / 2, 200f, 200f), "It is dark outside! You are not supposed to leave the hab! Better luck next time!!", notifStyle3);
 		}
+		if(duration == 3){
+			GUI.Label(new Rect(Screen.width / 2, Screen.height / 2, 200f, 200f), "WARNING: It is going to be dark. Get inside the hab!", notifStyle3);
+		}
 	}
 	
 	void killThePlayer()
 	{
 		transform.gameObject.SetActive (false);
 		Application.LoadLevel(0);
+	}
+	
+	void makeItDark(){
+		lt.enabled=true;
 	}
 }
