@@ -49,6 +49,7 @@ public class PlayerController : MonoBehaviour {
 	private bool inDoor;
 	private bool outDoor;
 	private bool running;
+	private bool dead;
 
 	private GameObject meteor;
 	private GameObject ice;
@@ -138,33 +139,24 @@ public class PlayerController : MonoBehaviour {
 	void Update () {
 
 		if (hunger >= 100) {
-			transform.gameObject.SetActive (false);
-			//DoorSound.Play();
-			print ("You died of hunger");
-			Application.LoadLevel(0);
+			GetComponent<Renderer>().enabled=false;
+			Invoke("killThePlayer", 3);
 		}
 
 		if (thirst >= 100) {
-			transform.gameObject.SetActive (false);
-			//DoorSound.Play();
-			print ("You died of thirst");
-			Application.LoadLevel(0);
+			GetComponent<Renderer>().enabled=false;
+			Invoke("killThePlayer", 3);
 		}
 
 		if (air <= 0) {
-			transform.gameObject.SetActive (false);
-			//DoorSound.Play();
-			print ("You ran out of air");
-			Application.LoadLevel(0);
+			GetComponent<Renderer>().enabled=false;
+			Invoke("killThePlayer", 3);
 		}
 
 		if (hab_air <= 0 && dressed == false) {
-			transform.gameObject.SetActive (false);
-			//DoorSound.Play();
-			print ("You ran out of oxygen");
-			Application.LoadLevel(0);
+			GetComponent<Renderer>().enabled=false;
+			Invoke("killThePlayer", 3);
 		}
-
 
 		if (encumbered) {
 			walkSpeed = encumberedSpeed;
@@ -332,8 +324,10 @@ public class PlayerController : MonoBehaviour {
 		
 		if (duration <= 0) {
 			lt.intensity = 0.1F;
-			if(outside == true)
-				Application.LoadLevel(0);
+			if(outside == true){
+				GetComponent<Renderer>().enabled=false;
+				Invoke("killThePlayer", 3);
+			}
 			else if(outside==false){
 				day_count++;
 
@@ -388,10 +382,11 @@ public class PlayerController : MonoBehaviour {
 			print("you are at the food console");
 			inAirConsole = true;
 		} else if (other.name == "AirlockOut" && dressed == false) {
-			transform.gameObject.SetActive (false);
+			dead = true;
+			GetComponent<Renderer>().enabled=false;
+			Invoke("killThePlayer", 2);
 			//DoorSound.Play();
 			print ("you are dead, you are dead");
-			Application.LoadLevel(0);
 		} 
 		else if (other.name == "AirlockOut" && dressed == true) {
 			outside = true;
@@ -436,4 +431,34 @@ public class PlayerController : MonoBehaviour {
 		inMeteor = false;
 	}
 	
+	void OnGUI () {
+	//GUI.Label(Rectangle(x,y), message, message style)
+		if (dead) {
+		 GUI.Label(new Rect(Screen.width / 2, Screen.height / 2, 200f, 200f), "You are dead due to lack of oxygen! Try again!!.", notifStyle3);
+		}
+		if (hunger >= 100) {
+		 GUI.Label(new Rect(Screen.width / 2, Screen.height / 2, 200f, 200f), "You died of hunger! Try again!!.", notifStyle3);
+		}
+
+		if (thirst >= 100) {
+		 GUI.Label(new Rect(Screen.width / 2, Screen.height / 2, 200f, 200f), "You died of thirst! Try again!!.", notifStyle3);
+		}
+
+		if (air <= 0) {
+		 GUI.Label(new Rect(Screen.width / 2, Screen.height / 2, 200f, 200f), "You ran out of air! You are dead!! Try again!!.", notifStyle3);
+		}
+
+		if (hab_air <= 0 && dressed == false) {
+		 GUI.Label(new Rect(Screen.width / 2, Screen.height / 2, 200f, 200f), "You ran out of oxygen! Try again!!.", notifStyle3);
+		}
+		if(duration <= 0 && outside == true){
+			GUI.Label(new Rect(Screen.width / 2, Screen.height / 2, 200f, 200f), "It is dark outside! You are not supposed to leave the hab! Better luck next time!!", notifStyle3);
+		}
+	}
+	
+	void killThePlayer()
+	{
+		transform.gameObject.SetActive (false);
+		Application.LoadLevel(0);
+	}
 }
