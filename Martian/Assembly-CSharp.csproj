@@ -51,7 +51,6 @@
      <Compile Include="Assets\Game Jam Menu Template\Scripts\PlayMusic.cs" />
      <Compile Include="Assets\Game Jam Menu Template\Scripts\QuitApplication.cs" />
      <Compile Include="Assets\Game Jam Menu Template\Scripts\SetAudioLevels.cs" />
-     <Compile Include="Assets\Game Jam Menu Template\Scripts\ShowControls.cs" />
      <Compile Include="Assets\Game Jam Menu Template\Scripts\ShowPanels.cs" />
      <Compile Include="Assets\Game Jam Menu Template\Scripts\StartOptions.cs" />
      <Compile Include="Assets\MapCameraController.cs" />

@@ -27,8 +27,7 @@ public class Airlock : MonoBehaviour {
 	void OnGUI () {
      //GUI.Label(Rectangle(x,y), message, message style)
 	 if (playerCloseEnough) {
-         GUI.Label(new Rect(Screen.width / 2, Screen.height / 2, 200f, 200f), "Player approaching Airlock...", notifStyle4);
-		 GUI.Label(new Rect(Screen.width / 2, (Screen.height / 2)+30, 200f, 200f), "Make sure that the suit is on.", notifStyle4);
+         GUI.Label(new Rect(Screen.width / 2, Screen.height / 2, 200f, 200f), "Player approaching Airlock...Make sure that the suit is on.", notifStyle4);
      }
 	}
 }

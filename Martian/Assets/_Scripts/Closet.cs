@@ -7,7 +7,6 @@ public class Closet : MonoBehaviour {
 	public float distance = 5;
 	private bool playerCloseEnough = false;
 	public GUIStyle notifStyle = new GUIStyle();
-	public GUIStyle notifStyle2 = new GUIStyle();
 	// Use this for initialization
 	void Start () {
 	
@@ -28,8 +27,7 @@ public class Closet : MonoBehaviour {
 	void OnGUI () {
      if (playerCloseEnough) {
 		 //GUI.Label(Rectangle(x,y), message, message style)
-         GUI.Label(new Rect(Screen.width / 2, Screen.height / 2, 200f, 200f), "Player approaching closet...", notifStyle);
-		 GUI.Label(new Rect(Screen.width / 2, Screen.height / 2, 200f, 200f), "Press '1' to wear/remove suit when you are in the closet.", notifStyle2);
+         GUI.Label(new Rect(Screen.width / 2, Screen.height / 2, 200f, 200f), "Player approaching closet...Press '1' to wear/remove suit when you are in the closet.", notifStyle);
      }
 	}
 }
