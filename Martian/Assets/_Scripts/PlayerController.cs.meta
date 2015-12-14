@@ -1,10 +1,27 @@
 fileFormatVersion: 2
 guid: c528c386d68154ca591d60cc1f74bde8
-timeCreated: 1446494881
+timeCreated: 1450110049
 licenseType: Free
 MonoImporter:
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - meteorObject: {instanceID: 0}
+  - suit: {instanceID: 0}
+  - lt: {instanceID: 0}
+  - hab_food_text: {instanceID: 0}
+  - hab_water_text: {instanceID: 0}
+  - hab_air_text: {instanceID: 0}
+  - player_hunger_text: {instanceID: 0}
+  - player_thirst_text: {instanceID: 0}
+  - player_air_text: {instanceID: 0}
+  - day_text: {instanceID: 0}
+  - mainSound: {instanceID: 0}
+  - windSound: {instanceID: 0}
+  - DoorSound: {instanceID: 0}
+  - SuitSound: {instanceID: 0}
+  - ComputerSound: {instanceID: 0}
+  - emptyTex: {instanceID: 0}
+  - fullTex: {instanceID: 0}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

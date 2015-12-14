@@ -1,16 +1,13 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/_Scripts/CameraController.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/_Scripts/PlayerController.cs">
     <Files>
-      <File FileName="Assets/_Scripts/CameraController.cs" Line="1" Column="1" />
-      <File FileName="Assets/_Scripts/IceTrigger.cs" Line="1" Column="1" />
-      <File FileName="Assets/_Scripts/PlayerController.cs" Line="250" Column="28" />
-      <File FileName="Assets/_Scripts/Computer.cs" Line="1" Column="1" />
-      <File FileName="Assets/_Scripts/AirConsole.cs" Line="1" Column="1" />
-      <File FileName="Assets/_Scripts/WaterConsole.cs" Line="1" Column="1" />
-      <File FileName="Assets/_Scripts/_MainGame.cs" Line="1" Column="1" />
-      <File FileName="Assets/_Scripts/Closet.cs" Line="1" Column="1" />
-      <File FileName="Assets/_Scripts/FoodConsole.cs" Line="1" Column="1" />
+      <File FileName="Assets/_Scripts/PlayerController.cs" Line="83" Column="27" />
+      <File FileName="Assets/_Scripts/tutorial.cs" Line="1" Column="1" />
+      <File FileName="Assets/Game Jam Menu Template/Scripts/QuitApplication.cs" Line="1" Column="1" />
+      <File FileName="Assets/Game Jam Menu Template/Scripts/Pause.cs" Line="1" Column="1" />
+      <File FileName="Assets/Game Jam Menu Template/Scripts/ShowPanels.cs" Line="1" Column="1" />
+      <File FileName="Assets/Game Jam Menu Template/Scripts/StartOptions.cs" Line="84" Column="22" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

@@ -77,6 +77,7 @@ public class PlayerController : MonoBehaviour {
 	public bool timer =false;
 	Vector3 temp = new Vector3(50.0f,0,0);  
 
+	/*
 	public GameObject hab_food_text;
 	public GameObject hab_water_text;
 	public GameObject hab_air_text;
@@ -84,6 +85,7 @@ public class PlayerController : MonoBehaviour {
 	public GameObject player_hunger_text;
 	public GameObject player_thirst_text;
 	public GameObject player_air_text;
+	*/
 
 	public GameObject day_text;
 
@@ -94,6 +96,14 @@ public class PlayerController : MonoBehaviour {
 	public AudioSource DoorSound;
 	public AudioSource SuitSound;
 	public AudioSource ComputerSound;
+
+	public float barDisplay; //current progress
+	public Vector2 pos = new Vector2(0,10);
+	public Vector2 size = new Vector2(100,20);
+	public Texture2D emptyTex;
+	public Texture2D fullTex;
+	public GUIStyle energy;
+
 
 	void Start () {
 		controller = GetComponent<CharacterController>();
@@ -107,13 +117,20 @@ public class PlayerController : MonoBehaviour {
 		hunger = 0;
 		thirst = 0;
 		air = 100;
-		hab_food_text.GetComponent<Text> ().text = food.ToString();
-		hab_water_text.GetComponent<Text> ().text = water.ToString();
-		hab_air_text.GetComponent<Text> ().text = hab_air.ToString();
 
-		player_hunger_text.GetComponent<Text> ().text = hunger.ToString();
-		player_air_text.GetComponent<Text> ().text = "Not In Suit";
-		player_thirst_text.GetComponent<Text> ().text = thirst.ToString();
+		//hab_food_text.GetComponent<Text> ().text = food.ToString();
+		//hab_water_text.GetComponent<Text> ().text = water.ToString();
+		//hab_air_text.GetComponent<Text> ().text = hab_air.ToString();
+
+
+		//hab_food_text.GetComponent<Text> ().text = food.ToString();
+		//hab_water_text.GetComponent<Text> ().text = water.ToString();
+		//hab_air_text.GetComponent<Text> ().text = hab_air.ToString();
+
+
+		//player_hunger_text.GetComponent<Text> ().text = hunger.ToString();
+		//player_air_text.GetComponent<Text> ().text = "Not In Suit";
+		//player_thirst_text.GetComponent<Text> ().text = thirst.ToString();
 
 		day_text.GetComponent<Text> ().text = day_count.ToString();
 
@@ -134,8 +151,10 @@ public class PlayerController : MonoBehaviour {
 			}
 		}
 	}
-	
+
+
 	void Update () {
+		barDisplay = Time.time*0.05f;
 
 		if (hunger >= 100) {
 			GetComponent<Renderer>().enabled=false;
@@ -177,6 +196,7 @@ public class PlayerController : MonoBehaviour {
 				running = false;
 			}
 		}
+
 		//Move PLayer
 		Vector3 input = new Vector3(Input.GetAxisRaw("Horizontal"),0,Input.GetAxisRaw("Vertical"));
 		
@@ -222,6 +242,7 @@ public class PlayerController : MonoBehaviour {
 
 		}
 		//End Change into Spacesuit
+
 
 		//eat food
 
@@ -286,11 +307,11 @@ public class PlayerController : MonoBehaviour {
 		//Control Player HUD Resource Display
 		if (hunger >= 0) {
 			hunger += Time.deltaTime * hungerSpeed;
-			player_hunger_text.GetComponent<Text> ().text = hunger.ToString ("F0");
+			//player_hunger_text.GetComponent<Text> ().text = hunger.ToString ("F0");
 		}
 		if (thirst >= 0) {
 			thirst += Time.deltaTime * thirstSpeed;
-			player_thirst_text.GetComponent<Text> ().text = thirst.ToString ("F0");
+			//player_thirst_text.GetComponent<Text> ().text = thirst.ToString ("F0");
 		}
 
 		food += Time.deltaTime * foodSpeed;
@@ -299,23 +320,22 @@ public class PlayerController : MonoBehaviour {
 
 		if (dressed) {
 			air -= Time.deltaTime * airSpeed;
-			player_air_text.GetComponent<Text> ().text = air.ToString ("F0");
+			//player_air_text.GetComponent<Text> ().text = air.ToString ("F0");
 		} else {
-			player_air_text.GetComponent<Text> ().text = "Not In Suit";
+			//player_air_text.GetComponent<Text> ().text = "Not In Suit";
 		}
 
 		//Control HAB HUD Resource Display
-		hab_food_text.GetComponent<Text> ().text = food.ToString("F0");
+		//hab_food_text.GetComponent<Text> ().text = food.ToString("F0");
 		hab_air -= Time.deltaTime * habAirSpeed;
-		hab_air_text.GetComponent<Text> ().text = hab_air.ToString("F0");
+		//hab_air_text.GetComponent<Text> ().text = hab_air.ToString("F0");
 		if (water > 0) {
 			water -= Time.deltaTime * habWaterSpeed;
 		}
-		hab_water_text.GetComponent<Text> ().text = water.ToString("F0");
+		//hab_water_text.GetComponent<Text> ().text = water.ToString("F0");
 
 
 
-		//Day Night Setting
 
 		if (timer == false) {
 			duration -= Time.deltaTime;
@@ -367,7 +387,6 @@ public class PlayerController : MonoBehaviour {
 		{
 			Invoke("killThePlayer", 5);
 		}
-
 
 	}
 	//Built in.
@@ -441,8 +460,76 @@ public class PlayerController : MonoBehaviour {
 		inWaterConsole = false;
 		inMeteor = false;
 	}
+
+
 	
 	void OnGUI () {
+
+		//draw the background:--hunger
+		GUI.BeginGroup(new Rect(pos.x, pos.y, size.x, size.y));
+		GUI.Box(new Rect(0,0, size.x, size.y), emptyTex);
+		
+		//draw the filled-in part:
+		GUI.BeginGroup(new Rect(0,0, hunger, size.y));
+		GUI.Box(new Rect(0,0, size.x, size.y), fullTex);
+		GUI.EndGroup();
+		GUI.EndGroup();
+
+		//draw the background:--thirst
+		GUI.BeginGroup(new Rect(pos.x+110, pos.y, size.x, size.y));
+		GUI.Box(new Rect(0,0, size.x, size.y), emptyTex);
+		
+		//draw the filled-in part:
+		GUI.BeginGroup(new Rect(0,0, thirst, size.y));
+		GUI.Box(new Rect(0,0, size.x, size.y), fullTex);
+		GUI.EndGroup();
+		GUI.EndGroup();
+
+		//draw the background:--air
+		GUI.BeginGroup(new Rect(pos.x+220, pos.y, size.x, size.y));
+		GUI.Box(new Rect(0,0, size.x, size.y), emptyTex);
+		
+		//draw the filled-in part:
+		GUI.BeginGroup(new Rect(0,0, air, size.y));
+		GUI.Box(new Rect(0,0, size.x, size.y), fullTex);
+		GUI.EndGroup();
+		GUI.EndGroup();
+
+		//draw the background:--food
+		GUI.BeginGroup(new Rect(pos.x+950, pos.y, size.x, size.y));
+		GUI.Box(new Rect(0,0, size.x, size.y), emptyTex);
+		
+		//draw the filled-in part:
+		GUI.BeginGroup(new Rect(0,0, food, size.y));
+		GUI.Box(new Rect(0,0, size.x, size.y), fullTex);
+		GUI.EndGroup();
+		GUI.EndGroup();
+
+		//draw the background:--water
+		GUI.BeginGroup(new Rect(pos.x+1060, pos.y, size.x, size.y));
+		GUI.Box(new Rect(0,0, size.x, size.y), emptyTex);
+		
+		//draw the filled-in part:
+		GUI.BeginGroup(new Rect(0,0, water, size.y));
+		GUI.Box(new Rect(0,0, size.x, size.y), fullTex);
+		GUI.EndGroup();
+		GUI.EndGroup();
+	
+
+		//draw the background:hab air
+		GUI.BeginGroup(new Rect(pos.x+1170, pos.y, size.x, size.y));
+		GUI.Box(new Rect(0,0, size.x, size.y), emptyTex);
+		
+		//draw the filled-in part:
+		GUI.BeginGroup(new Rect(0,0, hab_air/10, size.y));
+		GUI.Box(new Rect(0,0, size.x, size.y), fullTex);
+		GUI.EndGroup();
+		GUI.EndGroup();
+
+
+
+
+
 	//GUI.Label(Rectangle(x,y), message, message style)
 		if (dead) {
 		 GUI.Label(new Rect(Screen.width / 2, Screen.height / 2, 200f, 200f), "You are dead due to lack of oxygen! Try again!!.", notifStyle3);
