@@ -24,7 +24,17 @@ public class tutorial : MonoBehaviour {
 		}
 		if (GUI.Button(new Rect(Screen.width / 2, Screen.height /2 + 25, 150, 25),"Quit Game")) 
 		{
-		 Application.Quit();
+				 //If we are running in a standalone build of the game
+			#if UNITY_STANDALONE
+				//Quit the application
+				Application.Quit();
+			#endif
+
+				//If we are running in the editor
+			#if UNITY_EDITOR
+				//Stop playing the scene
+				UnityEditor.EditorApplication.isPlaying = false;
+			#endif
 		}
 	}
 }
