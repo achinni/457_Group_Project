@@ -107,7 +107,6 @@ public class PlayerController : MonoBehaviour {
 		hunger = 0;
 		thirst = 0;
 		air = 100;
-
 		hab_food_text.GetComponent<Text> ().text = food.ToString();
 		hab_water_text.GetComponent<Text> ().text = water.ToString();
 		hab_air_text.GetComponent<Text> ().text = hab_air.ToString();
@@ -361,9 +360,13 @@ public class PlayerController : MonoBehaviour {
 		if (duration >= 5) {
 			lt.intensity=1;
 			timer = false;
-			duration += 10;
+			duration = 10;
 		}
-
+		
+		if(duration == 7)
+		{
+			Invoke("killThePlayer", 5);
+		}
 
 
 	}
@@ -464,6 +467,10 @@ public class PlayerController : MonoBehaviour {
 		}
 		if(duration == 3){
 			GUI.Label(new Rect(Screen.width / 2, Screen.height / 2, 200f, 200f), "WARNING: It is going to be dark. Get inside the hab!", notifStyle3);
+		}
+		if(duration == 7)
+		{
+			GUI.Label(new Rect(Screen.width / 2, Screen.height / 2, 200f, 200f), "Yea!! You won!", notifStyle3);
 		}
 	}
 	
