@@ -1,0 +1,35 @@
+CALLID,TIMESTAMP,DISPOSITION,TALKTIME,CONFERENCES,LoanNumber,DNIS,CALLS,LeadType,DATE,AGENTNAME,COST,IVRCOST,LastName,CONTACTID,SalesForceId,City,State,Number2,Number3,Company,FirstName,Zip,Number1,Street,CAMPAIGN,CALLTYPE,AFTERCALLWORKTIME,TALKTIMELESSHOLDANDPARK,QUEUEWAITTIME,OriginatingLeadType,SPEED OF ANSWER,HANDLE TIME,ABANDONED,TIME TO ABANDON,CALL TIME,PREVIEW TIME,VOICEMAILS HANDLE TIME,RING TIME,HOUROFDAY,TIME,CONTACT RECORD CREATED DATETIME,SecondsComp,@FileName,@LastUpdatedtDW,@LastUpdateByDW,@CALLSIGNATURE,@Five9DialerCallLogID
+
+query = "LOAD DATA INFILE '"+filename+"' REPLACE "
+            		+ "INTO TABLE TCPADialerCallLog "
+            		+ "FIELDS TERMINATED BY \',\' ENCLOSED BY \'\"' ESCAPED BY \'\\\' "
+            		+ "LINES STARTING BY \'\' "
+            		+ "TERMINATED BY \'\' "
+            		+ "IGNORE 1 LINES "
+            		+ "(CALLID,TIMESTAMP,DISPOSITION,TALKTIME,CONFERENCES,LoanNumber,DNIS,CALLS,LeadType,DATE,AGENTNAME,COST,IVRCOST,LastName,CONTACTID,SalesForceId,City,State,Number2,Number3,Company,FirstName,Zip,Number1,Street,CAMPAIGN,CALLTYPE,AFTERCALLWORKTIME,TALKTIMELESSHOLDANDPARK,QUEUEWAITTIME,OriginatingLeadType,SecondsComp);"; 
+            		
+java.sql.SQLException: Access denied for user ''@'%' (using password: YES)
+
+query = "LOAD DATA LOCAL INFILE '"+filename+"' REPLACE INTO TABLE "+tablename+" "
+            		+ "FIELDS TERMINATED BY ',' "
+            		+ "ENCLOSED BY '\"' "
+            		+ "LINES TERMINATED BY '\r' "
+            		+ "IGNORE 1 LINES "
+            		+ "(@CALLID,TIMESTAMP,DISPOSITION,@TALKTIME,CONFERENCES,LoanNumber,DNIS,@CALLS,LeadType,@DATE,AGENTNAME,COST,IVRCOST,LastName,CONTACTID,SalesForceId,City,State,Number2,Number3,Company,FirstName,Zip,Number1,Street,CAMPAIGN,CALLTYPE,@AFTERCALLWORKTIME,@TALKTIMELESSHOLDANDPARK,@QUEUEWAITTIME,OriginatingLeadType,@dummy1,@dummy2,@dummy3,@dummy4,@dummy5,@dummy6,@dummy7,@dummy8,HOUROFDAY,@TIME,@dummy9,@SecondsComp) "
+            		+ "SET "
+            		+ "CALLID = @CALLID,"
+            		+ "TALKTIME=TIME_TO_SEC(DATE_FORMAT(CAST(CONCAT('2000-11-11 ',@TALKTIME) AS DATETIME), '%H:%i:%s')),"
+            		+ "DATE = STR_TO_DATE(@DATE, '%Y/%m/%d'),"
+            		+ "CALLS=CAST(@CALLS AS SIGNED),"
+            		+ "AFTERCALLWORKTIME=TIME_TO_SEC(DATE_FORMAT(CAST(CONCAT('2000-11-11 ',@AFTERCALLWORKTIME) AS DATETIME), '%H:%i:%s')),"
+            		+ "TALKTIMELESSHOLDANDPARK=TIME_TO_SEC(DATE_FORMAT(CAST(CONCAT('2000-11-11 ',@TALKTIMELESSHOLDANDPARK) AS DATETIME), '%H:%i:%s')),"
+            		+ "QUEUEWAITTIME=TIME_TO_SEC(DATE_FORMAT(CAST(CONCAT('2000-11-11 ',@QUEUEWAITTIME) AS DATETIME), '%H:%i:%s')),"
+            		//+ "CALLID = @CALLID, "
+            		+ "SecondsComp = @SecondsComp,"
+//            		+ "FileName = 'test', "
+//            		+ "LastUpdatedtDW = now(), "
+//            		+ "LastUpdateByDW = 'me', "
+            		+ "CALLSIGNATURE = CONCAT(@CALLID,'_',@SecondsComp)"
+ 				//	+ "Five9DialerCallLogID = 1"
+ 					+ "";
+//          
