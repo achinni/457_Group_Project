@@ -466,63 +466,63 @@ public class PlayerController : MonoBehaviour {
 	void OnGUI () {
 
 		//draw the background:--hunger
-		GUI.BeginGroup(new Rect(pos.x, pos.y, size.x, size.y));
-		GUI.Box(new Rect(0,0, size.x, size.y), emptyTex);
+		GUI.BeginGroup(new Rect(pos.x+100, pos.y, size.x, size.y));
+		GUI.DrawTexture(new Rect(0,0, size.x, size.y), emptyTex);
 		
 		//draw the filled-in part:
 		GUI.BeginGroup(new Rect(0,0, hunger, size.y));
-		GUI.Box(new Rect(0,0, size.x, size.y), fullTex);
+		GUI.DrawTexture(new Rect(0,0, size.x, size.y), fullTex);
 		GUI.EndGroup();
 		GUI.EndGroup();
 
 		//draw the background:--thirst
-		GUI.BeginGroup(new Rect(pos.x+110, pos.y, size.x, size.y));
-		GUI.Box(new Rect(0,0, size.x, size.y), emptyTex);
+		GUI.BeginGroup(new Rect(pos.x+220, pos.y, size.x, size.y));
+		GUI.DrawTexture(new Rect(0,0, size.x, size.y), emptyTex);
 		
 		//draw the filled-in part:
 		GUI.BeginGroup(new Rect(0,0, thirst, size.y));
-		GUI.Box(new Rect(0,0, size.x, size.y), fullTex);
+		GUI.DrawTexture(new Rect(0,0, size.x, size.y), fullTex);
 		GUI.EndGroup();
 		GUI.EndGroup();
 
 		//draw the background:--air
-		GUI.BeginGroup(new Rect(pos.x+220, pos.y, size.x, size.y));
-		GUI.Box(new Rect(0,0, size.x, size.y), emptyTex);
+		GUI.BeginGroup(new Rect(pos.x+340, pos.y, size.x, size.y));
+		GUI.DrawTexture(new Rect(0,0, size.x, size.y), fullTex);
 		
 		//draw the filled-in part:
 		GUI.BeginGroup(new Rect(0,0, air, size.y));
-		GUI.Box(new Rect(0,0, size.x, size.y), fullTex);
+		GUI.DrawTexture(new Rect(0,0, size.x, size.y), emptyTex);
 		GUI.EndGroup();
 		GUI.EndGroup();
 
 		//draw the background:--food
-		GUI.BeginGroup(new Rect(pos.x+950, pos.y, size.x, size.y));
-		GUI.Box(new Rect(0,0, size.x, size.y), emptyTex);
+		GUI.BeginGroup(new Rect(pos.x+720, pos.y, size.x, size.y));
+		GUI.DrawTexture(new Rect(0,0, size.x, size.y), fullTex);
 		
 		//draw the filled-in part:
 		GUI.BeginGroup(new Rect(0,0, food, size.y));
-		GUI.Box(new Rect(0,0, size.x, size.y), fullTex);
+		GUI.DrawTexture(new Rect(0,0, size.x, size.y), emptyTex);
 		GUI.EndGroup();
 		GUI.EndGroup();
 
 		//draw the background:--water
-		GUI.BeginGroup(new Rect(pos.x+1060, pos.y, size.x, size.y));
-		GUI.Box(new Rect(0,0, size.x, size.y), emptyTex);
+		GUI.BeginGroup(new Rect(pos.x+840, pos.y, size.x, size.y));
+		GUI.DrawTexture(new Rect(0,0, size.x, size.y), fullTex);
 		
 		//draw the filled-in part:
 		GUI.BeginGroup(new Rect(0,0, water, size.y));
-		GUI.Box(new Rect(0,0, size.x, size.y), fullTex);
+		GUI.DrawTexture(new Rect(0,0, size.x, size.y), emptyTex);
 		GUI.EndGroup();
 		GUI.EndGroup();
 	
 
 		//draw the background:hab air
-		GUI.BeginGroup(new Rect(pos.x+1170, pos.y, size.x, size.y));
-		GUI.Box(new Rect(0,0, size.x, size.y), emptyTex);
+		GUI.BeginGroup(new Rect(pos.x+960, pos.y, size.x, size.y));
+		GUI.DrawTexture(new Rect(0,0, size.x, size.y), fullTex);
 		
 		//draw the filled-in part:
 		GUI.BeginGroup(new Rect(0,0, hab_air/10, size.y));
-		GUI.Box(new Rect(0,0, size.x, size.y), fullTex);
+		GUI.DrawTexture(new Rect(0,0, size.x, size.y), emptyTex);
 		GUI.EndGroup();
 		GUI.EndGroup();
 

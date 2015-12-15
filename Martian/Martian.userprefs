@@ -1,13 +1,13 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
   <MonoDevelop.Ide.Workbench ActiveDocument="Assets/_Scripts/PlayerController.cs">
     <Files>
-      <File FileName="Assets/_Scripts/PlayerController.cs" Line="83" Column="27" />
-      <File FileName="Assets/_Scripts/tutorial.cs" Line="1" Column="1" />
+      <File FileName="Assets/_Scripts/PlayerController.cs" Line="470" Column="10" />
+      <File FileName="Assets/_Scripts/tutorial.cs" Line="58" Column="1" />
       <File FileName="Assets/Game Jam Menu Template/Scripts/QuitApplication.cs" Line="1" Column="1" />
       <File FileName="Assets/Game Jam Menu Template/Scripts/Pause.cs" Line="1" Column="1" />
       <File FileName="Assets/Game Jam Menu Template/Scripts/ShowPanels.cs" Line="1" Column="1" />
-      <File FileName="Assets/Game Jam Menu Template/Scripts/StartOptions.cs" Line="84" Column="22" />
+      <File FileName="Assets/Game Jam Menu Template/Scripts/StartOptions.cs" Line="1" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
